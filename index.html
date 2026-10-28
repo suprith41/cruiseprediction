@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oceanic Cruise Line — Passenger Safety & Survival Predictor</title>
+  <meta name="description" content="AI-powered passenger safety and survival intelligence system for ocean cruise voyages. Calculate passenger survival probability with machine learning.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Ambient Ocean Glow Backdrops -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-crest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+            <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.26.59 4.38 1.62 6"/>
+            <path d="m4.5 12 7.5-8 7.5 8"/>
+            <path d="M12 4v16"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-eyebrow">GRAND OCEANIC VOYAGE</span>
+          <span class="brand-name">CRUISE PREDICTOR</span>
+        </div>
+      </div>
+      
+      <div class="header-center">
+        <span class="status-pill">
+          <span class="pulse-dot"></span>
+          Machine Learning Engine Active
+        </span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#manifest" class="nav-link active" id="nav-manifest">Manifest Entry</a>
+        <a href="#insights" class="nav-link" id="nav-insights">Fleet Analytics</a>
+        <a href="#about" class="nav-link" id="nav-about">Methodology</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <img src="/static/cruise_hero.jpg" alt="Oceanic Cruise Luxury Liner at Sunset" class="hero-bg-img" />
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="star-icon">✦</span>
+        <span>HISTORICAL VOYAGE SURVIVAL INTELLIGENCE</span>
+        <span class="star-icon">✦</span>
+      </div>
+      <h1 class="hero-title">Cruise Passenger Survival Probability</h1>
+      <p class="hero-subtitle">
+        Enter passenger credentials and voyage parameters to evaluate survival probabilities, 
+        evacuation protocol priority, and safety factor diagnostics powered by machine learning.
+      </p>
+      
+      <div class="hero-metrics">
+        <div class="metric-card">
+          <span class="metric-val" id="hero-model-acc">81.9%</span>
+          <span class="metric-lbl">Logistic Regression Accuracy</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-card">
+          <span class="metric-val" id="hero-fleet-passengers">891</span>
+          <span class="metric-lbl">Historical Passengers Analyzed</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-card">
+          <span class="metric-val" id="hero-models-active">Dual Model</span>
+          <span class="metric-lbl">LR + Random Forest Ensemble</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="main-wrapper" id="manifest">
+    
+    <!-- Quick Presets Bar -->
+    <section class="presets-section">
+      <div class="presets-header">
+        <div class="presets-title-wrap">
+          <span class="sparkle">⚡</span>
+          <h3>Quick Test Passenger Archetypes</h3>
+        </div>
+        <p class="presets-hint">Click any passenger profile below to populate manifest values instantly:</p>
+      </div>
+      <div class="presets-grid" id="presets-container">
+        <!-- Injected via JavaScript -->
+        <div class="preset-skeleton">Loading passenger presets...</div>
+      </div>
+    </section>
+
+    <!-- Main Interactive Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Left Column: Input Form -->
+      <section class="form-card" id="form-container">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">Passenger Manifest Details</h2>
+              <p class="card-subtitle">Fill in all personal and voyage specifications</p>
+            </div>
+          </div>
+          <button type="button" class="btn-ghost" id="btn-reset" title="Reset form to defaults">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            Reset
+          </button>
+        </div>
+
+        <form id="passenger-form" novalidate>
+          
+          <!-- Field Group: Identity -->
+          <div class="form-group-box">
+            <div class="group-legend">
+              <span class="legend-num">1</span>
+              <span>Passenger Identity</span>
+            </div>
+
+            <div class="grid-2col">
+              <div class="input-field">
+                <label for="input-name">Passenger Full Name</label>
+                <div class="input-with-icon">
+                  <input type="text" id="input-name" placeholder="e.g. Eleanor Margaret Vance" value="Eleanor Margaret Vance" required autocomplete="off" />
+                  <span class="input-icon">✎</span>
+                </div>
+              </div>
+
+              <div class="input-field">
+                <label for="input-title">Courtesy Title</label>
+                <select id="input-title">
+                  <option value="Auto">Auto-Detect from Name</option>
+                  <option value="Mr">Mr. (Adult Male)</option>
+                  <option value="Mrs" selected>Mrs. (Married Female)</option>
+                  <option value="Miss">Miss. (Unmarried Female / Child)</option>
+                  <option value="Master">Master. (Young Boy)</option>
+                  <option value="Rare">Rare (Doctor, Officer, Royalty)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Gender & Age Row -->
+            <div class="grid-2col" style="margin-top: 14px;">
+              <div class="input-field">
+                <label>Passenger Gender</label>
+                <div class="segmented-control" id="gender-control">
+                  <button type="button" class="segment-btn" data-gender="male" id="gender-male">
+                    <span class="segment-icon">♂</span>
+                    <span>Male</span>
+                  </button>
+                  <button type="button" class="segment-btn active" data-gender="female" id="gender-female">
+                    <span class="segment-icon">♀</span>
+                    <span>Female</span>
+                  </button>
+                </div>
+                <input type="hidden" id="input-gender" value="female" />
+              </div>
+
+              <div class="input-field">
+                <div class="label-with-badge">
+                  <label for="input-age">Age</label>
+                  <span class="value-badge" id="age-display-badge">
+                    <span id="age-display">32</span> yrs (<span id="age-tier-display">Adult</span>)
+                  </span>
+                </div>
+                <div class="slider-wrapper">
+                  <input type="range" id="input-age" min="1" max="80" value="32" step="1" />
+                  <div class="slider-ticks">
+                    <span>1 yr</span>
+                    <span>18</span>
+                    <span>40</span>
+                    <span>60</span>
+                    <span>80 yrs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Field Group: Accommodations & Passage -->
+          <div class="form-group-box">
+            <div class="group-legend">
+              <span class="legend-num">2</span>
+              <span>Cruise Cabin Class & Voyage</span>
+            </div>
+
+            <div class="input-field">
+              <label>Cabin Class Selection</label>
+              <div class="class-cards-grid" id="class-cards">
+                <div class="class-card active" data-class="1" id="class-card-1">
+                  <div class="class-card-top">
+                    <span class="class-badge gold">1st Class</span>
+                    <span class="class-fare-tag">Upper Deck</span>
+                  </div>
+                  <div class="class-card-name">Promenade Suite</div>
+                  <div class="class-card-desc">Top decks adjacent to lifeboats, highest survival rate (63%)</div>
+                </div>
+
+                <div class="class-card" data-class="2" id="class-card-2">
+                  <div class="class-card-top">
+                    <span class="class-badge silver">2nd Class</span>
+                    <span class="class-fare-tag">Middle Deck</span>
+                  </div>
+                  <div class="class-card-name">Saloon Cabin</div>
+                  <div class="class-card-desc">Mid-level deck accommodations, moderate survival rate (47%)</div>
+                </div>
+
+                <div class="class-card" data-class="3" id="class-card-3">
+                  <div class="class-card-top">
+                    <span class="class-badge bronze">3rd Class</span>
+                    <span class="class-fare-tag">Lower Hull</span>
+                  </div>
+                  <div class="class-card-name">Steerage Berth</div>
+                  <div class="class-card-desc">Lower hull berths, long stairwells, lowest survival rate (24%)</div>
+                </div>
+              </div>
+              <input type="hidden" id="input-pclass" value="1" />
+            </div>
+
+            <div class="grid-2col" style="margin-top: 14px;">
+              <!-- Fare Input -->
+              <div class="input-field">
+                <div class="label-with-badge">
+                  <label for="input-fare">Ticket Fare (£)</label>
+                  <span class="value-badge" id="fare-display-badge">£<span id="fare-display">85.00</span></span>
+                </div>
+                <div class="slider-wrapper">
+                  <input type="range" id="input-fare" min="5" max="300" value="85" step="1" />
+                  <div class="slider-ticks">
+                    <span>£5</span>
+                    <span>£50</span>
+                    <span>£150</span>
+                    <span>£300</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Embarkation Port -->
+              <div class="input-field">
+                <label for="input-embarked">Embarkation Port</label>
+                <div class="port-cards-grid" id="port-cards">
+                  <div class="port-chip active" data-port="C">
+                    <span class="port-code">C</span>
+                    <span class="port-name">Cherbourg</span>
+                  </div>
+                  <div class="port-chip" data-port="Q">
+                    <span class="port-code">Q</span>
+                    <span class="port-name">Queenstown</span>
+                  </div>
+                  <div class="port-chip" data-port="S">
+                    <span class="port-code">S</span>
+                    <span class="port-name">Southampton</span>
+                  </div>
+                </div>
+                <input type="hidden" id="input-embarked" value="C" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Field Group: Family Companionship -->
+          <div class="form-group-box">
+            <div class="group-legend">
+              <span class="legend-num">3</span>
+              <span>Companionship & Family Aboard</span>
+            </div>
+
+            <div class="grid-2col">
+              <!-- SibSp -->
+              <div class="input-field">
+                <label>Siblings / Spouse (SibSp)</label>
+                <div class="stepper-control">
+                  <button type="button" class="stepper-btn" id="sibsp-minus" aria-label="Decrease siblings">−</button>
+                  <span class="stepper-value" id="sibsp-val">1</span>
+                  <button type="button" class="stepper-btn" id="sibsp-plus" aria-label="Increase siblings">+</button>
+                </div>
+                <input type="hidden" id="input-sibsp" value="1" />
+              </div>
+
+              <!-- Parch -->
+              <div class="input-field">
+                <label>Parents / Children (Parch)</label>
+                <div class="stepper-control">
+                  <button type="button" class="stepper-btn" id="parch-minus" aria-label="Decrease parents">−</button>
+                  <span class="stepper-value" id="parch-val">0</span>
+                  <button type="button" class="stepper-btn" id="parch-plus" aria-label="Increase parents">+</button>
+                </div>
+                <input type="hidden" id="input-parch" value="0" />
+              </div>
+            </div>
+
+            <div class="companionship-summary" id="companionship-summary">
+              <span class="summary-pill" id="summary-family-size">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Total Family Size: <strong>2</strong>
+              </span>
+              <span class="summary-pill" id="summary-alone">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                Traveling: <strong>With Companions</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-wrap">
+            <button type="submit" class="btn-primary" id="btn-submit">
+              <span class="btn-sparkle">✦</span>
+              <span class="btn-text">Compute Cruise Survival Probability</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Results & Intelligence Console -->
+      <section class="results-card" id="results-container">
+        
+        <!-- Header -->
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <div class="icon-circle gold-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">Survival Prediction Outcome</h2>
+              <p class="card-subtitle">AI inference results and factor breakdown</p>
+            </div>
+          </div>
+          <span class="timestamp-tag" id="results-time">Real-time</span>
+        </div>
+
+        <!-- Dynamic Output Content -->
+        <div class="results-body" id="results-body">
+          
+          <!-- Primary Probability Gauge Section -->
+          <div class="gauge-section" id="gauge-section">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 160 160">
+                <circle class="gauge-bg" cx="80" cy="80" r="68"></circle>
+                <circle class="gauge-progress" id="gauge-circle" cx="80" cy="80" r="68" stroke-dasharray="427.26" stroke-dashoffset="100"></circle>
+              </svg>
+              <div class="gauge-inner-content">
+                <span class="gauge-value" id="gauge-percent">--%</span>
+                <span class="gauge-label">Survival Odds</span>
+              </div>
+            </div>
+
+            <div class="status-banner-wrap">
+              <div class="status-banner safe" id="status-banner">
+                <span class="banner-icon" id="banner-icon">🛡️</span>
+                <div class="banner-text-block">
+                  <div class="banner-title" id="banner-title">Calculating...</div>
+                  <div class="banner-desc" id="banner-desc">Analyzing passenger features against historical cruise voyage models.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model Consensus Comparison -->
+          <div class="models-consensus-box">
+            <h4 class="box-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              Dual Model Consensus
+            </h4>
+            
+            <div class="model-row">
+              <div class="model-meta">
+                <span class="model-name">Logistic Regression (Primary Model)</span>
+                <span class="model-score" id="lr-score-display">--%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="lr-progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="model-row">
+              <div class="model-meta">
+                <span class="model-name">Random Forest Classifier (Ensemble)</span>
+                <span class="model-score" id="rf-score-display">--%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="rf-progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnostic Explanations Factors -->
+          <div class="factors-section">
+            <h4 class="box-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              Key Survival Drivers & Risk Diagnostics
+            </h4>
+            <div class="factors-list" id="factors-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Boarding Pass Preview -->
+          <div class="boarding-pass-wrap">
+            <h4 class="box-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
+              Generated Voyage Boarding Pass
+            </h4>
+            
+            <div class="boarding-pass" id="boarding-pass">
+              <div class="pass-left">
+                <div class="pass-header">
+                  <div class="pass-ship-name">OCEANIC CRUISE LINES</div>
+                  <div class="pass-ticket-num" id="pass-ticket">CRUISE-1C-4812</div>
+                </div>
+                <div class="pass-passenger-name" id="pass-name">Eleanor Margaret Vance</div>
+                
+                <div class="pass-details-grid">
+                  <div class="pass-item">
+                    <span class="pass-label">ACCOMMODATION</span>
+                    <span class="pass-val" id="pass-class">1st Class Suite</span>
+                  </div>
+                  <div class="pass-item">
+                    <span class="pass-label">DEPARTURE PORT</span>
+                    <span class="pass-val" id="pass-port">Cherbourg (FR)</span>
+                  </div>
+                  <div class="pass-item">
+                    <span class="pass-label">AGE / GENDER</span>
+                    <span class="pass-val" id="pass-age-gender">32 / Female</span>
+                  </div>
+                  <div class="pass-item">
+                    <span class="pass-label">PARTY SIZE</span>
+                    <span class="pass-val" id="pass-party">2 (With Companion)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pass-divider">
+                <div class="pass-notch top"></div>
+                <div class="pass-line"></div>
+                <div class="pass-notch bottom"></div>
+              </div>
+
+              <div class="pass-right">
+                <div class="pass-status-seal" id="pass-status-seal">
+                  <span class="seal-text" id="pass-seal-text">SURVIVOR</span>
+                  <span class="seal-rate" id="pass-seal-rate">85.6%</span>
+                </div>
+                <div class="barcode">
+                  <span>||| | || |||| | | ||| |||| |</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Fleet Analytics Section -->
+    <section class="insights-section" id="insights">
+      <div class="section-title-wrap">
+        <span class="section-tag">HISTORICAL DATASET EXPLORER</span>
+        <h2 class="section-title">Cruise Voyage Fleet Patterns</h2>
+        <p class="section-desc">Key factors that dictated passenger safety across 891 historical cruise passenger records.</p>
+      </div>
+
+      <div class="insights-grid">
+        <!-- Card 1: By Class -->
+        <div class="insight-card">
+          <div class="insight-card-head">
+            <span class="insight-icon">⚓</span>
+            <h3>Survival by Cabin Class</h3>
+          </div>
+          <p class="insight-summary">Upper promenade deck proximity drastically influenced evacuation rates.</p>
+          <div class="stat-bars">
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>1st Class (Upper Deck)</span>
+                <strong class="gold-text">63.0%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill gold-fill" style="width: 63%"></div></div>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>2nd Class (Mid Deck)</span>
+                <strong class="silver-text">47.3%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill silver-fill" style="width: 47.3%"></div></div>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>3rd Class (Lower Berths)</span>
+                <strong class="bronze-text">24.2%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill bronze-fill" style="width: 24.2%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: By Gender -->
+        <div class="insight-card">
+          <div class="insight-card-head">
+            <span class="insight-icon">👥</span>
+            <h3>Survival by Gender</h3>
+          </div>
+          <p class="insight-summary">Evacuation protocols prioritized female passengers onto lifeboats.</p>
+          <div class="stat-bars">
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>Female Passengers</span>
+                <strong class="cyan-text">74.2%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill cyan-fill" style="width: 74.2%"></div></div>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>Male Passengers</span>
+                <strong class="coral-text">18.9%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill coral-fill" style="width: 18.9%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: By Age Tier -->
+        <div class="insight-card">
+          <div class="insight-card-head">
+            <span class="insight-icon">👶</span>
+            <h3>Survival by Age Tier</h3>
+          </div>
+          <p class="insight-summary">Children had heightened survival odds, while senior travelers faced mobility hurdles.</p>
+          <div class="stat-bars">
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>Children (0-12 yrs)</span>
+                <strong class="emerald-text">58.0%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill emerald-fill" style="width: 58%"></div></div>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>Adults (19-50 yrs)</span>
+                <strong class="blue-text">38.9%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill blue-fill" style="width: 38.9%"></div></div>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-labels">
+                <span>Seniors (51+ yrs)</span>
+                <strong class="amber-text">34.4%</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill amber-fill" style="width: 34.4%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="method-section" id="about">
+      <div class="method-card">
+        <div class="method-header">
+          <span class="method-badge">MODEL ARCHITECTURE</span>
+          <h3>How the Prediction Engine Works</h3>
+        </div>
+        <p>
+          The predictor is trained on historical cruise voyage manifest data. When you submit a passenger profile, the application performs:
+        </p>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h4>Feature Extraction</h4>
+            <p>Parses courtesy titles, calculates total party size (SibSp + Parch + 1), and flags solo traveler status.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h4>Vector Encoding</h4>
+            <p>Maps gender, embarkation ports, and titles into deterministic one-hot encoded vectors calibrated with dataset medians.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h4>Ensemble Prediction</h4>
+            <p>Executes Logistic Regression and Random Forest models, generating an ensemble consensus survival percentage.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h4>Diagnostic Audit</h4>
+            <p>Assesses each feature to produce human-readable positive and negative safety factor explanations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-title">GRAND OCEANIC CRUISE LINE</span>
+        <span class="footer-desc">Passenger Safety & Survival Intelligence System</span>
+      </div>
+      <div class="footer-meta">
+        <span>Built with Python & Machine Learning</span>
+        <span>•</span>
+        <span>Historical Voyage Analytics</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
